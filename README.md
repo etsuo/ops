@@ -1,5 +1,5 @@
 ops
 ====
 
-A Go package that provides OS abstracted operations functionality for sysadmin
+A Golang package that provides OS abstracted operations for sysadmin
 automation tasks.
