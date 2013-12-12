@@ -4,6 +4,7 @@ import (
 	"github.com/etsuo/log"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
 )
 
@@ -50,4 +51,14 @@ func FsObjExists(path string) (bool, error) {
 		return false, nil
 	}
 	return false, err
+}
+
+// Returns the absolute path of the provided path
+func GetAbsolutePath(path string) string {
+	abs, e := filepath.Abs(path)
+	if e != nil {
+		abs = path
+	}
+
+	return abs
 }
