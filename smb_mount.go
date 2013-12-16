@@ -56,7 +56,6 @@ func (m *MountedSmbVolume) mount_Darwin() error {
 	var cmd string
 	if m.password == "" {
 		cmd = fmt.Sprintf("mount -t smbfs //%s@%s/%s %s", m.userName, m.serverAddress, m.remotePath, m.localPath)
-
 	} else {
 		cmd = fmt.Sprintf("mount -t smbfs //%s:%s@%s/%s %s", m.userName, url.QueryEscape(m.password), m.serverAddress, m.remotePath, m.localPath)
 	}
