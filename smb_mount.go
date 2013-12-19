@@ -60,6 +60,7 @@ func (m *MountedSmbVolume) mount_Darwin() error {
 		cmd = fmt.Sprintf("mount -t smbfs //%s:%s@%s/%s %s", m.userName, url.QueryEscape(m.password), m.serverAddress, m.remotePath, m.localPath)
 	}
 
+	log.Send.Debugf("Mounting server: %s, Path: '%s', to local path: '%s'", m.serverAddress, m.remotePath, m.localPath)
 	if err := RunCommand(cmd); err != nil {
 		return err
 	}
