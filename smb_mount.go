@@ -62,6 +62,10 @@ func (m *MountedSmbVolume) mount_Darwin() error {
 
 	log.Send.Debugf("Mounting server: %s, Path: '%s', to local path: '%s'", m.serverAddress, m.remotePath, m.localPath)
 	if err := RunCommand(cmd); err != nil {
+		if err.Error() == "exit status 64" {
+			log.Send.Warning("Exist staus 64: If you have this share already mounted to another path. Try " +
+				"dismounting it first. This shouldn't be necessary - but sometimes this fixes the problem.")
+		}
 		return err
 	}
 
@@ -114,7 +118,7 @@ func (m *MountedSmbVolume) createLocalTmpDir() error {
 	if err != nil {
 		log.Send.Fatalf("Unable to create required directory. Error: %s", err.Error())
 	}
-	return err
+	return nil
 }
 
 func (m *MountedSmbVolume) removeLocalTmpDir() error {
